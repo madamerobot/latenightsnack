@@ -17,9 +17,8 @@ app.use(bodyParser.urlencoded({
 }))
 app.use(bodyParser.json())
 
-//Requiring & Initialisinf Google API
-var GooglePlaces = require('google-places');
-var places = new GooglePlaces('AIzaSyD3iPbO5Vm0TDeRZT8o0XBGiL0oUZ8vBX4');
+//Requiring 'request' module
+var request = require('request');
 
 //Setting PUG view engine
 app.set('views', './views');
@@ -42,18 +41,31 @@ app.post('/search', function(req,res){
 	var query = req.body.searchquery;
 	console.log('Query: '+query);
 
-	places.search({keyword: query}, function(err, response){
-		console.log('hi');
-		console.log("search: ", response.results);
- 
-		places.details({reference: response.results[0].reference}, function(err, response) {
-		console.log("search details: ", response.result.website);
-		// search details:  http://www.vermonster.com/ 
-  		});
+	//GOOGLE REQUEST URL
+	//ALWAYS THE SAME
+	const baseURL = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?';
+	const key = 'key=AIzaSyD3iPbO5Vm0TDeRZT8o0XBGiL0oUZ8vBX4';
+	
+	//VARIABLES
+	const location = 'location=52.370216,4.895168';
+	const radius = 'radius=10';
+
+	//REQUEST TO GOOGLE API
+	const url = `${baseURL}${location}&${radius}&types=food&${key}`;
+
+	request({
+		uri: url,
+		method: "GET",
+		timeout: 10000,
+		followRedirect: true,
+		maxRedireccts: 10
+	}, function(err, response, body) {
+		// console.log('Body: '+body);
+		console.log('Response: '+response)
+		console.log('Results: '+response.results); //RETURNS UNDEFINED
+		console.log(body.html_attributions); //RETURNS UNDEFINED
 	});
 });
-
-// app.post(`/https://maps.googleapis.com/maps/api/place/nearbysearch/json?`+${query}+`AIzaSyD3iPbO5Vm0TDeRZT8o0XBGiL0oUZ8vBX4`);
 
 //------------DEFINING PORT 8080 FOR SERVER----------------------
 var server = app.listen(8080, () => {
