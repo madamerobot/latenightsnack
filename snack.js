@@ -53,6 +53,7 @@ app.post('/search', function(req,res){
 	//REQUEST TO GOOGLE API
 	const url = `${baseURL}${location}&${radius}&types=food&${key}`;
 
+
 	request({
 		uri: url,
 		method: "GET",
@@ -61,6 +62,8 @@ app.post('/search', function(req,res){
 		maxRedireccts: 10
 	}, function(err, response, body) {
 
+		var allresults = [];
+
 		if(err){
 			console.log(err);
 		} else {
@@ -68,17 +71,22 @@ app.post('/search', function(req,res){
 			var results = responseparsed.results;
 
 			for (var i = 0; i < results.length; i++) {
-				console.log('Results: '+results[i].name)
+				console.log('Results: '+results[i].name);
+				console.log('Adress: '+results[i].formatted_address);
+				console.log('Rating: '+results[i].rating);
 				var openinghours = results[i].opening_hours
-				// console.log('Opening Hours: '+openinghours);
 				if (openinghours !== undefined){
 						console.log('Open now: '+openinghours.open_now);
+						allresults.push(results[i]);
 				} else {
 					console.log('Unfortunately no opening hours provided');
 				}
-			}
-		}		
-	}); res.end();
+			} 
+		} 
+		// console.log('All results: '+allresults);
+		// console.log('One result: '+allresults[0].name);
+		res.render("results", {allresults: allresults});
+	}); 
 });
 
 //------------DEFINING PORT 8080 FOR SERVER----------------------

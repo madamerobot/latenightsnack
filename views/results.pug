@@ -1,0 +1,16 @@
+doctype html
+html
+	head
+		title Late Night Snack
+	body
+		h3 Search for a keyword
+		form(action='/search', method='POST' id='snacksearch')
+			| Search for:
+			br
+			input(type='text', name='searchquery')
+			br
+			br
+			input(type='submit', value='Submit')
+		h3 Grab your snack here:
+			each hit in allresults
+				p=hit.name
