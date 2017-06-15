@@ -60,10 +60,17 @@ app.post('/search', function(req,res){
 		followRedirect: true,
 		maxRedireccts: 10
 	}, function(err, response, body) {
-		// console.log('Body: '+body);
-		console.log('Response: '+response)
-		console.log('Results: '+response.results); //RETURNS UNDEFINED
-		console.log(body.html_attributions); //RETURNS UNDEFINED
+
+		if(err){
+			console.log(err);
+		} else {
+			var responseparsed = JSON.parse(body);
+			var results = responseparsed.results;
+
+			for (var i = 0; i < results.length; i++) {
+				console.log('Results: '+results[i].name)
+			}
+		}		
 	});
 });
 
