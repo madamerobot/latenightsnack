@@ -58,17 +58,19 @@ html
 						var resultlng = results[i].geometry.location.lng;
 						var resultlocation = {lat: resultlat, lng: resultlng};
 						var resultname = results[i].name;
+						console.log('TEST: '+ resultname);
 
 						//Setting a new marker
 						var marker = new google.maps.Marker({
 							position: resultlocation,
-							map: map
+							map: map,
+							name: resultname
 						});
 						//Creating info windows
 						var infowindow = new google.maps.InfoWindow();
 
-						google.maps.event.addListener(marker, 'click', function() {
-							infowindow.setContent(resultname);
+						marker.addListener('click', function() {
+							infowindow.setContent(this.name);
 							infowindow.open(map, this);
 						});
 					}
