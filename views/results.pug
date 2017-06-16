@@ -2,8 +2,6 @@ doctype html
 html
 	head
 		title Late Night Snack
-		meta(name='viewport', content='initial-scale=1.0')
-		meta(charset='utf-8')
 		style.
 			/* Always set the map height explicitly to define the size of the div
 			* element that contains the map. */
@@ -17,36 +15,56 @@ html
 			padding: 0;
 			}
 	body
-		h3 Search for a keyword
-		form(action='/search', method='POST' id='snacksearch')
-			| Search for:
-			br
-			input(type='text', name='searchquery')
-			br
-			br
-			input(type='submit', value='Submit')
-		h3 Grab your snack here:
-			each hit in allresults
-				p=hit.name
-				p=hit.geometry.location.lat
-				p=hit.geometry.location.lng
+		h3 Find your Midnight Snack
+		//- h3 Grab your snack here:
+		//- 	each hit in allresults
+		//- 		h4=hit.name
+		//- 		h4=hit.geometry.location.lat
+		br
 		#map
 		script.
 			function initMap() {
-			var uluru = {lat: 52.370216, lng: 4.895168};
-			var test = {lat: 52.3646927, lng: 4.892054};
 
-			var map = new google.maps.Map(document.getElementById('map'), {
-			zoom: 15,
-			center: uluru
-			});
-			var marker = new google.maps.Marker({
-			position: uluru,
-			map: map
-			});
-			var marker = new google.maps.Marker({
-			position: test,
-			map: map
-			});
+				function escapeHtml(text) {
+				  return text
+				      .replace(/&amp;/g, "&")
+				      .replace(/&lt;/g, "<")
+				      .replace(/&gt;/g, ">")
+				      .replace(/&quot;/g, '"')
+				      .replace(/&#039;/g, "'");
+				}
+
+				function replaceLinkQuotes(text) { //replaces <a href="bla"> to <a href='bla'>
+					return text
+						.replace(/<a href="/g, "<a href='")
+						.replace(/">/g, "'>");
+				}
+
+				var results = "#{JSON.stringify(allresults)}";
+				results = escapeHtml(results);
+				results = replaceLinkQuotes(results);
+				results = JSON.parse(results);
+
+				var centerlat = 52.370216;
+				var centerlng = 4.895168;				
+				var centerlocation = {lat: centerlat, lng: centerlng};
+
+				var map = new google.maps.Map(document.getElementById('map'), {
+						zoom: 15,
+						center: centerlocation
+				});
+
+				for(var i=0; i<results.length; i++){
+
+					var resultlat = results[i].geometry.location.lat;
+					var resultlng = results[i].geometry.location.lng;
+					var resultlocation = {lat: resultlat, lng: resultlng};
+
+					var marker = new google.maps.Marker({
+						position: resultlocation,
+						map: map
+					});
+
+				}
 			}
 		script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyAK_he47G4ZHGYXhg_qSvi2ObQuAqHWIr4&callback=initMap', async='', defer='')

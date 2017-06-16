@@ -26,23 +26,36 @@ app.set('views', './views');
 app.set('view engine', 'pug');
 
 app.use(express.static('public'));
+app.use(express.static('css'));
+app.use(express.static('img'));
+
 
 //------ROUTES----------//
 
 app.get('/', function(req,res){
-	res.render("home");
+	var now = moment().format("HH:mm");
+	var day = moment().format('dddd');
+
+	res.render("home", {
+		now: now,
+		day: day
+	});
 })
 
 app.get('/search', function(req,res){
-	var now = moment().format("h:mm: kk");
 	var day = moment().format('dddd');
+	var now = moment().format("ddd, hA");
+	
 	res.render("search", {
 		now: now, 
 		day: day
 	});
 })
 
-app.post('/search', function(req,res){
+
+
+
+app.post('/results', function(req,res){
 
 	var query = req.body.searchquery;
 	console.log('Query: '+query);
@@ -93,6 +106,7 @@ app.post('/search', function(req,res){
 		res.render("results", {allresults: allresults});
 	}); 
 });
+
 
 //------------DEFINING PORT 8080 FOR SERVER----------------------
 var server = app.listen(8080, () => {

@@ -1,0 +1,48 @@
+.w3-col h3 {
+	text-align: center !important;
+	margin-bottom: 10px;
+	text-transform: uppercase;
+}
+
+.w3-col p {
+	text-align: center !important;
+	text-transform: uppercase;
+	margin-bottom: 40px;
+}
+
+.time {
+    font-size: 57px;
+    text-align: center;
+}
+
+.w3-row {
+	background-color: black;
+}
+
+img {
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+}
+
+button.btn.btn-danger {
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+}
+
+.btn-danger {
+    color: #fff;
+    background-color: #000 !important;
+    border-color: #000 !important;
+}
+
+.btn-danger:hover {
+  background: #fff;
+}
+
+@media (min-width: 768px) {
+  .time {
+  	font-size: 100px;
+  }
+}

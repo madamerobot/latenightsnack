@@ -2,10 +2,29 @@ doctype html
 html
 	head
 		title Late Night Snack
+		link(rel='stylesheet', href='https://www.w3schools.com/w3css/4/w3.css')
+		link(rel='stylesheet', href='../../main.css', type='text/css')
+		link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', integrity='sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u', crossorigin='anonymous')
+
+
+
 
 	body
-		h3 Find your late night snack here
-		form(action='/', method='POST' id='snacksearch')
-			input(type="range" id="slider" name="points" min="0" max="10")
-		h3=number
-		p #{now}
+	.w3-row
+	.w3-col(style='width:20%')
+		p 
+	.w3-col(style='width:60%')
+		h3
+			|	It's 
+			span(style='color:#d02168') #{day} 
+			|	find your late night snack
+		p
+		img.img-responsive(src='/marker.png', alt='')
+		.time #{now}
+		form(action='/results', method='POST')
+			.form-group
+				button.btn.btn-danger.btn-s(type='submit') FIND FOOD
+
+	.w3-col(style='width:20%')
+		p
+
