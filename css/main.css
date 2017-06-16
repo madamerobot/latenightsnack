@@ -1,18 +1,50 @@
+body {
+    font-family: "Raleway";
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #333;
+    background-color: #112130 !important;
+}
+
 .w3-col h3 {
+	text-align: center !important;
+	margin-bottom: 0px;
+	text-transform: uppercase;
+	margin-top: 40px;
+	color: white;
+	font-family: "Antonio";
+	font-size: 75px !important;
+}
+
+.w3-col h4 {
 	text-align: center !important;
 	margin-bottom: 10px;
 	text-transform: uppercase;
+	margin-top: -35px;
+	color: white;
+	font-family: 'Oswald', sans-serif;";
+	font-size: 84px !important;
+	letter-spacing: 7px;
+	margin-top: 8px;
 }
 
 .w3-col p {
 	text-align: center !important;
 	text-transform: uppercase;
 	margin-bottom: 40px;
+	color: white;
+}
+
+.w3-col.middle {
+	margin-top: 55px;
+    border-radius: 12px;
 }
 
 .time {
     font-size: 57px;
     text-align: center;
+    font-family: 'Orbitron', sans-serif;
+    color: #61b395;
 }
 
 .w3-row {
@@ -46,3 +78,40 @@ button.btn.btn-danger {
   	font-size: 100px;
   }
 }
+
+.form-group {
+    margin-bottom: 40px !important;
+}
+
+.img-responsive {
+    display: block;
+    max-width: 50% !important;
+    height: auto;
+}
+
+h4, h4 {
+    font-size: 85px !important;
+    text-align: center;
+}
+
+img.img-border {
+	margin-top: 10px;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+	width: 100%;
+}
+
+.button button, input, select, textarea {
+	margin-left: auto;
+    margin-right: auto;
+}
+
+.button {
+	display: block;
+	width: 70%;
+	margin-left: auto;
+    margin-right: auto;
+}
+
+
