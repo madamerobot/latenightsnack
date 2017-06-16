@@ -43,9 +43,6 @@ app.get('/search', function(req,res){
 
 app.post('/search', function(req,res){
 
-	// var query = req.body.searchquery;
-	// console.log('Query: '+query);
-
 	//GOOGLE REQUEST URL
 	//ALWAYS THE SAME
 	const baseURL = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?';
@@ -53,10 +50,11 @@ app.post('/search', function(req,res){
 	
 	//VARIABLES
 	const location = 'location=52.370216,4.895168';
-	const radius = 'radius=1000';
+	const type = 'type=restaurant';
+	const rankby = 'rankby=distance';
 
 	//REQUEST TO GOOGLE API
-	const url = `${baseURL}${location}&${radius}&types=restaurant&${key}`;
+	const url = `${baseURL}${location}&${rankby}&${type}&${key}`;
 
 	request({
 		uri: url,
@@ -76,10 +74,12 @@ app.post('/search', function(req,res){
 
 			for (var i = 0; i < results.length; i++) {
 				console.log('Results: '+results[i].name);
-				console.log('Adress: '+results[i].formatted_address);
+				console.log('Address: '+results[i].formatted_address);
 				console.log('Rating: '+results[i].rating);
+				console.log('Location Lat: '+results[i].geometry.location.lat);
+				console.log('Location Lat: '+results[i].geometry.location.lng);
 				var openinghours = results[i].opening_hours
-				if (openinghours !== undefined){
+				if (openinghours !== undefined && openinghours.open_now === true){
 						console.log('Open now: '+openinghours.open_now);
 						allresults.push(results[i]);
 				} else {
