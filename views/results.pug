@@ -1,0 +1,52 @@
+doctype html
+html
+	head
+		title Late Night Snack
+		meta(name='viewport', content='initial-scale=1.0')
+		meta(charset='utf-8')
+		style.
+			/* Always set the map height explicitly to define the size of the div
+			* element that contains the map. */
+			#map {
+			height: 100%;
+			}
+			/* Optional: Makes the sample page fill the window. */
+			html, body {
+			height: 100%;
+			margin: 0;
+			padding: 0;
+			}
+	body
+		h3 Search for a keyword
+		form(action='/search', method='POST' id='snacksearch')
+			| Search for:
+			br
+			input(type='text', name='searchquery')
+			br
+			br
+			input(type='submit', value='Submit')
+		h3 Grab your snack here:
+			each hit in allresults
+				p=hit.name
+				p=hit.geometry.location.lat
+				p=hit.geometry.location.lng
+		#map
+		script.
+			function initMap() {
+			var uluru = {lat: 52.370216, lng: 4.895168};
+			var test = {lat: 52.3646927, lng: 4.892054};
+
+			var map = new google.maps.Map(document.getElementById('map'), {
+			zoom: 15,
+			center: uluru
+			});
+			var marker = new google.maps.Marker({
+			position: uluru,
+			map: map
+			});
+			var marker = new google.maps.Marker({
+			position: test,
+			map: map
+			});
+			}
+		script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyAK_he47G4ZHGYXhg_qSvi2ObQuAqHWIr4&callback=initMap', async='', defer='')
