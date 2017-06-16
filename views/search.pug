@@ -3,11 +3,7 @@ html
 	head
 		title Late Night Snack
 	body
-		h3 Search for a keyword
+		h3 Find your Midnight Snack
+		h3 It's #{now}
 		form(action='/search', method='POST' id='snacksearch')
-			| Search for:
-			br
-			input(type='text', name='searchquery')
-			br
-			br
-			input(type='submit', value='Submit')
+			input(type='submit', value='FIND FOOD')

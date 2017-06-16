@@ -20,6 +20,9 @@ app.use(bodyParser.json())
 //Requiring 'request' module
 var request = require('request');
 
+//Requiring moment module
+var moment = require('moment');
+
 //Setting PUG view engine
 app.set('views', './views');
 app.set('view engine', 'pug');
@@ -33,26 +36,27 @@ app.get('/', function(req,res){
 })
 
 app.get('/search', function(req,res){
-	res.render("search");
+
+	var now = moment().format("h:mm a");
+	res.render("search", {now: now});
 })
 
 app.post('/search', function(req,res){
 
-	var query = req.body.searchquery;
-	console.log('Query: '+query);
+	// var query = req.body.searchquery;
+	// console.log('Query: '+query);
 
 	//GOOGLE REQUEST URL
 	//ALWAYS THE SAME
 	const baseURL = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?';
-	const key = 'key=AIzaSyD3iPbO5Vm0TDeRZT8o0XBGiL0oUZ8vBX4';
+	const key = 'key='+process.env.googleapikey;
 	
 	//VARIABLES
 	const location = 'location=52.370216,4.895168';
 	const radius = 'radius=1000';
 
 	//REQUEST TO GOOGLE API
-	const url = `${baseURL}${location}&${radius}&types=food&${key}`;
-
+	const url = `${baseURL}${location}&${radius}&types=restaurant&${key}`;
 
 	request({
 		uri: url,
@@ -83,9 +87,8 @@ app.post('/search', function(req,res){
 				}
 			} 
 		} 
-		// console.log('All results: '+allresults);
-		// console.log('One result: '+allresults[0].name);
-		res.render("results", {allresults: allresults});
+		var now = moment().format("h:mm a");
+		res.render("results", {allresults: allresults, now: now});
 	}); 
 });
 
