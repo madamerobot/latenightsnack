@@ -75,7 +75,6 @@ app.post('/', function(req,res){
 			for (var i = 0; i < results.length; i++) {
 				console.log('Results: '+results[i].name);
 				console.log('Rating: '+results[i].rating);
-				console.log('Address: '+results[i].address_components)
 				var openinghours = results[i].opening_hours
 				if (openinghours !== undefined && openinghours.open_now === true){
 						console.log('Open now: '+openinghours.open_now);

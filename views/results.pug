@@ -50,26 +50,29 @@ html
 						center: centerlocation
 				});
 
-				for(var i=0; i<results.length; i++){
+				function createMarker(){
 
-					var resultlat = results[i].geometry.location.lat;
-					var resultlng = results[i].geometry.location.lng;
-					var resultlocation = {lat: resultlat, lng: resultlng};
-					var resultname = results[i].name;
-					console.log('TEST: '+resultname)
+					for(var i=0; i<results.length; i++){
 
-					//Setting a new marker
-					var marker = new google.maps.Marker({
-						position: resultlocation,
-						map: map
-					});
-					//Creating info windows
-					var infowindow = new google.maps.InfoWindow();
+						var resultlat = results[i].geometry.location.lat;
+						var resultlng = results[i].geometry.location.lng;
+						var resultlocation = {lat: resultlat, lng: resultlng};
+						var resultname = results[i].name;
 
-					google.maps.event.addListener(marker, 'click', function() {
-					infowindow.setContent(resultname);
-					infowindow.open(map, this);
-					});
+						//Setting a new marker
+						var marker = new google.maps.Marker({
+							position: resultlocation,
+							map: map
+						});
+						//Creating info windows
+						var infowindow = new google.maps.InfoWindow();
+
+						google.maps.event.addListener(marker, 'click', function() {
+							infowindow.setContent(resultname);
+							infowindow.open(map, this);
+						});
+					}
 				}
+				createMarker();
 			}
 		script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyAK_he47G4ZHGYXhg_qSvi2ObQuAqHWIr4&callback=initMap', async='', defer='')
