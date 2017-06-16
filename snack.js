@@ -31,17 +31,17 @@ app.use(express.static('public'));
 
 //------ROUTES----------//
 
-app.get('/', function(req,res){
-	res.render("home");
-})
+// app.get('/', function(req,res){
+// 	res.render("home");
+// })
 
-app.get('/search', function(req,res){
+app.get('/', function(req,res){
 
 	var now = moment().format("h:mm a");
 	res.render("search", {now: now});
 })
 
-app.post('/search', function(req,res){
+app.post('/', function(req,res){
 
 	//GOOGLE REQUEST URL
 	//ALWAYS THE SAME
@@ -74,10 +74,8 @@ app.post('/search', function(req,res){
 
 			for (var i = 0; i < results.length; i++) {
 				console.log('Results: '+results[i].name);
-				console.log('Address: '+results[i].formatted_address);
 				console.log('Rating: '+results[i].rating);
-				console.log('Location Lat: '+results[i].geometry.location.lat);
-				console.log('Location Lat: '+results[i].geometry.location.lng);
+				console.log('Address: '+results[i].address_components)
 				var openinghours = results[i].opening_hours
 				if (openinghours !== undefined && openinghours.open_now === true){
 						console.log('Open now: '+openinghours.open_now);
