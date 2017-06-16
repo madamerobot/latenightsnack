@@ -52,9 +52,12 @@ app.post('/', function(req,res){
 	const location = 'location=52.370216,4.895168';
 	const type = 'type=restaurant';
 	const rankby = 'rankby=distance';
+	const radius = 'radius=50000';
+	const nextpage = 'pagetoken'
 
 	//REQUEST TO GOOGLE API
-	const url = `${baseURL}${location}&${rankby}&${type}&${key}`;
+	// const url = `${baseURL}${location}&${radius}&${type}&${key}`;
+	const url = `${baseURL}${location}&${rankby}&${type}&${nextpage}&${key}`;
 
 	request({
 		uri: url,
@@ -74,7 +77,8 @@ app.post('/', function(req,res){
 
 			for (var i = 0; i < results.length; i++) {
 				console.log('Results: '+results[i].name);
-				console.log('Rating: '+results[i].rating);
+				console.log('Results length: '+results.length)
+
 				var openinghours = results[i].opening_hours
 				if (openinghours !== undefined && openinghours.open_now === true){
 						console.log('Open now: '+openinghours.open_now);
@@ -86,6 +90,7 @@ app.post('/', function(req,res){
 		} 
 		var now = moment().format("h:mm a");
 		res.render("results", {allresults: allresults, now: now});
+		console.log('Allresults: '+allresults);
 	}); 
 });
 

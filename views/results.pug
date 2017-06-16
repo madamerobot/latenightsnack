@@ -58,19 +58,22 @@ html
 						var resultlng = results[i].geometry.location.lng;
 						var resultlocation = {lat: resultlat, lng: resultlng};
 						var resultname = results[i].name;
-						console.log('TEST: '+ resultname);
+						var resultaddress = results[i].vicinity;
+						var resultrating = results[i].rating;
 
 						//Setting a new marker
 						var marker = new google.maps.Marker({
 							position: resultlocation,
 							map: map,
-							name: resultname
+							name: resultname,
+							address: resultaddress,
+							rating: resultrating
 						});
 						//Creating info windows
 						var infowindow = new google.maps.InfoWindow();
 
 						marker.addListener('click', function() {
-							infowindow.setContent(this.name);
+							infowindow.setContent("<h1>"+this.name+"</h1>"+"<h2>"+this.address+"<br>"+"Rating: "+this.rating+"</h2>");
 							infowindow.open(map, this);
 						});
 					}
