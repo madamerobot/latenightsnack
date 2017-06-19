@@ -2,7 +2,42 @@ doctype html
 html
 	head
 		title Late Night Snack
+		link(rel='stylesheet', href='https://www.w3schools.com/w3css/4/w3.css')
+		link(rel='stylesheet', href='../../main.css', type='text/css')
+		link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', integrity='sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u', crossorigin='anonymous')
+		link(href='https://fonts.googleapis.com/css?family=Orbitron', rel='stylesheet')
+		link(href='https://fonts.googleapis.com/css?family=Oswald:700', rel='stylesheet')
+
+
+
+
+
+
 	body
-		h3 Find your late night snack here
-		form(action='/', method='POST' id='snacksearch')
-			input(type="range" id="slider" name="points" min="0" max="10")
+	.w3-row
+	
+	.w3-col(style='width:30%')
+		p 
+	.w3-col.middle(style='width:40%')
+		img.img-responsive(src='/logo.png', alt='')
+		h3 LATE NIGHT 
+		
+		img.img-border(src='/border.png', alt='')
+		h4 SNACK
+		.time #{now}
+		
+
+
+		form(action='/results', method='POST')
+			.button
+				//- button.btn.btn-danger.btn-lg(type='submit') FIND FOOD
+				input(type='image', src='/button.png', alt='Submit Form', class="button")
+
+
+
+
+
+	.w3-col(style='width:30%')
+		p
+
+			//- span(style='color:#d02168') #{day} <br>

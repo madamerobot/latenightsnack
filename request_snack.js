@@ -19,49 +19,61 @@ app.use(bodyParser.json())
 
 //Requiring 'request' module
 var request = require('request');
-
-//Requiring moment module
 var moment = require('moment');
 
 //Setting PUG view engine
 app.set('views', './views');
 app.set('view engine', 'pug');
 
+app.use(express.static('public'));
 app.use(express.static('css'));
 app.use(express.static('img'));
 
-//----API KEYS----//
-const mapsjsapikey = 'key='+process.env.googlemapsjsapi;
-const key = 'key='+process.env.googleapikey;
 
 //------ROUTES----------//
 
-// app.get('/', function(req,res){
-// 	res.render("home");
-// })
-
 app.get('/', function(req,res){
-
 	var now = moment().format("HH:mm");
-	var day = moment().format("dddd");
-	res.render("home", {now: now, day: day, mapsjsapikey: mapsjsapikey});
+	var day = moment().format('dddd');
+
+	res.render("home", {
+		now: now,
+		day: day
+	});
 })
+
+app.get('/search', function(req,res){
+	var day = moment().format('dddd');
+	var now = moment().format("ddd, hA");
+	
+	res.render("search", {
+		now: now, 
+		day: day
+	});
+})
+
+
+
 
 app.post('/results', function(req,res){
 
+	var query = req.body.searchquery;
+	console.log('Query: '+query);
+
 	//GOOGLE REQUEST URL
 	//ALWAYS THE SAME
-	const baseURL = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?';
-	
-	//VARIABLES
-	const location = 'location=52.370216,4.895168';
-	const type = 'type=restaurant';
-	const rankby = 'rankby=distance';
-	const radius = 'radius=50000';
+  	const baseURL = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?';
+    const key = 'key='+process.env.googleapikey;
+    const mapsapikey = 'key='+process.env.googlemapskey;
 
-	//REQUEST TO GOOGLE API
-	// const url = `${baseURL}${location}&${radius}&${type}&${key}`;
-	const url = `${baseURL}${location}&${rankby}&${type}&${key}`;
+    
+    //VARIABLES
+    const location = 'location=52.370216,4.895168';
+    const radius = 'radius=1000';
+    //REQUEST TO GOOGLE API
+    const url = `${baseURL}${location}&${radius}&types=restaurant&${key}`;
+	console.log(url);
+
 
 	request({
 		uri: url,
@@ -81,10 +93,10 @@ app.post('/results', function(req,res){
 
 			for (var i = 0; i < results.length; i++) {
 				console.log('Results: '+results[i].name);
-				console.log('Results length: '+results.length)
-
+				console.log('Adress: '+results[i].formatted_address);
+				console.log('Rating: '+results[i].rating);
 				var openinghours = results[i].opening_hours
-				if (openinghours !== undefined && openinghours.open_now === true){
+				if (openinghours !== undefined){
 						console.log('Open now: '+openinghours.open_now);
 						allresults.push(results[i]);
 				} else {
@@ -92,12 +104,16 @@ app.post('/results', function(req,res){
 				}
 			} 
 		} 
-		res.render("results", {allresults: allresults, mapsjsapikey: mapsjsapikey});
-		console.log('Allresults: '+allresults);
+		console.log('All results: '+allresults);
+		res.render("results", {
+			allresults: allresults,
+			mapsapikey: mapsapikey
+		});
 	}); 
 });
 
+
 //------------DEFINING PORT 8080 FOR SERVER----------------------
 var server = app.listen(8080, () => {
-	console.log('Yo, this http://localhost:' + server.address().port);
+	console.log('Yo, this http://localhost is running:' + server.address().port);
 });
