@@ -29,6 +29,10 @@ app.set('view engine', 'pug');
 
 app.use(express.static('public'));
 
+//----API KEYS----//
+const mapsjsapikey = 'key='+process.env.googlemapsjsapi;
+const key = 'key='+process.env.googleapikey;
+
 //------ROUTES----------//
 
 // app.get('/', function(req,res){
@@ -38,7 +42,7 @@ app.use(express.static('public'));
 app.get('/', function(req,res){
 
 	var now = moment().format("h:mm a");
-	res.render("search", {now: now});
+	res.render("search", {now: now, mapsjsapikey: mapsjsapikey});
 })
 
 app.post('/', function(req,res){
@@ -46,18 +50,16 @@ app.post('/', function(req,res){
 	//GOOGLE REQUEST URL
 	//ALWAYS THE SAME
 	const baseURL = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?';
-	const key = 'key='+process.env.googleapikey;
 	
 	//VARIABLES
 	const location = 'location=52.370216,4.895168';
 	const type = 'type=restaurant';
 	const rankby = 'rankby=distance';
 	const radius = 'radius=50000';
-	const nextpage = 'pagetoken'
 
 	//REQUEST TO GOOGLE API
 	// const url = `${baseURL}${location}&${radius}&${type}&${key}`;
-	const url = `${baseURL}${location}&${rankby}&${type}&${nextpage}&${key}`;
+	const url = `${baseURL}${location}&${rankby}&${type}&${key}`;
 
 	request({
 		uri: url,
@@ -89,7 +91,7 @@ app.post('/', function(req,res){
 			} 
 		} 
 		var now = moment().format("h:mm a");
-		res.render("results", {allresults: allresults, now: now});
+		res.render("results", {allresults: allresults, now: now, mapsjsapikey: mapsjsapikey});
 		console.log('Allresults: '+allresults);
 	}); 
 });
