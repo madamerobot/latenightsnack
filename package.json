@@ -25,11 +25,12 @@
     "body-parser": "^1.17.2",
     "express": "^4.15.3",
     "fs": "0.0.1-security",
+    "dotenv": "^4.0.0",
     "googleapis": "^19.0.0",
+    "moment": "^2.18.1",
     "pug": "^2.0.0-rc.2",
     "request": "^2.81.0",
     "underscore": "^1.8.3",
     "url": "^0.11.0"
-  },
-  "devDependencies": {}
+
 }

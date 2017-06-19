@@ -1,0 +1,102 @@
+//---------CONFIG AND LIBRARIES-----------------
+
+//Requiring express library
+const express = require('express');
+//Initialising express library
+const app = express();
+
+//Requiring file system library
+const fs = require('fs');
+
+//Requiring body parser library
+//This adds a body property to the request parameter of every app.get and app.post
+const bodyParser = require('body-parser');
+//Initialising body-parser li;brary
+app.use(bodyParser.urlencoded({
+	extended: false
+}))
+app.use(bodyParser.json())
+
+//Requiring 'request' module
+var request = require('request');
+
+//Requiring moment module
+var moment = require('moment');
+
+//Setting PUG view engine
+app.set('views', './views');
+app.set('view engine', 'pug');
+
+app.use(express.static('public'));
+
+//----API KEYS----//
+const mapsjsapikey = 'key='+process.env.googlemapsjsapi;
+const key = 'key='+process.env.googleapikey;
+
+//------ROUTES----------//
+
+// app.get('/', function(req,res){
+// 	res.render("home");
+// })
+
+app.get('/', function(req,res){
+
+	var now = moment().format("h:mm a");
+	res.render("search", {now: now, mapsjsapikey: mapsjsapikey});
+})
+
+app.post('/', function(req,res){
+
+	//GOOGLE REQUEST URL
+	//ALWAYS THE SAME
+	const baseURL = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?';
+	
+	//VARIABLES
+	const location = 'location=52.370216,4.895168';
+	const type = 'type=restaurant';
+	const rankby = 'rankby=distance';
+	const radius = 'radius=50000';
+
+	//REQUEST TO GOOGLE API
+	// const url = `${baseURL}${location}&${radius}&${type}&${key}`;
+	const url = `${baseURL}${location}&${rankby}&${type}&${key}`;
+
+	request({
+		uri: url,
+		method: "GET",
+		timeout: 10000,
+		followRedirect: true,
+		maxRedireccts: 10
+	}, function(err, response, body) {
+
+		var allresults = [];
+
+		if(err){
+			console.log(err);
+		} else {
+			var responseparsed = JSON.parse(body);
+			var results = responseparsed.results;
+
+			for (var i = 0; i < results.length; i++) {
+				console.log('Results: '+results[i].name);
+				console.log('Results length: '+results.length)
+
+				var openinghours = results[i].opening_hours
+				if (openinghours !== undefined && openinghours.open_now === true){
+						console.log('Open now: '+openinghours.open_now);
+						allresults.push(results[i]);
+				} else {
+					console.log('Unfortunately no opening hours provided');
+				}
+			} 
+		} 
+		var now = moment().format("h:mm a");
+		res.render("results", {allresults: allresults, now: now, mapsjsapikey: mapsjsapikey});
+		console.log('Allresults: '+allresults);
+	}); 
+});
+
+//------------DEFINING PORT 8080 FOR SERVER----------------------
+var server = app.listen(8080, () => {
+	console.log('Yo, this http://localhost is running:' + server.address().port);
+});
