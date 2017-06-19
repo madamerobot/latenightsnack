@@ -64,6 +64,8 @@ app.post('/results', function(req,res){
 	//ALWAYS THE SAME
   	const baseURL = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?';
     const key = 'key='+process.env.googleapikey;
+    const mapsapikey = 'key='+process.env.googlemapskey;
+
     
     //VARIABLES
     const location = 'location=52.370216,4.895168';
@@ -103,7 +105,10 @@ app.post('/results', function(req,res){
 			} 
 		} 
 		console.log('All results: '+allresults);
-		res.render("results", {allresults: allresults});
+		res.render("results", {
+			allresults: allresults,
+			mapsapikey: mapsapikey
+		});
 	}); 
 });
 

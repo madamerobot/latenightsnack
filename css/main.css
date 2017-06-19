@@ -90,9 +90,18 @@ button.btn.btn-danger {
 }
 
 h4, h4 {
-    font-size: 85px !important;
+    font-size: 47px !important;
     text-align: center;
 }
+
+@media (min-width: 768px) {
+	h4, h4 {
+	    font-size: 87px !important;
+	    text-align: center;
+	}
+}
+
+
 
 img.img-border {
 	margin-top: 10px;
@@ -109,9 +118,19 @@ img.img-border {
 
 .button {
 	display: block;
-	width: 70%;
+	width: 100%;
 	margin-left: auto;
     margin-right: auto;
 }
 
+
+
+@media (min-width: 768px) {
+	.button {
+		display: block;
+		width: 70%;
+		margin-left: auto;
+	    margin-right: auto;
+	}
+}
 
