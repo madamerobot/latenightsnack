@@ -148,7 +148,6 @@ html
 								map: map,
 								position: resultlocation,
 								id: resultid
-
 							});
 
 							//CREATING INFO WINDOW & INITIALISING DETAIL SEARCH
@@ -166,9 +165,10 @@ html
 									
 										infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +
 										place.address_components[1].long_name + ' ' + place.address_components[0].long_name + '<br>' + place.address_components[4].long_name + ' ' + place.address_components[7].long_name + '</div>' + '<br>' + place.opening_hours.weekday_text[0] + '<br>' + place.opening_hours.weekday_text[1] + '<br>' + place.opening_hours.weekday_text[2] + '<br>' + place.opening_hours.weekday_text[3] + '<br>' + place.opening_hours.weekday_text[4] + '<br>' + place.opening_hours.weekday_text[5] + '<br>' + place.opening_hours.weekday_text[6])
+										
 										console.log(place.address_components[2].long_name);
 										console.log(place.formatted_address)
-										
+															
 								})
 							infowindow.open(map, this);
 							})
@@ -176,5 +176,6 @@ html
 					}
 					createMarker();
 				}
+
 
 	script(async='', defer='', src='https://maps.googleapis.com/maps/api/js?'+mapsjsapikey+'&libraries=places&callback=initMap')

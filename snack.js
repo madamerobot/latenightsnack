@@ -36,12 +36,8 @@ const key = 'key='+process.env.googleapikey;
 
 //------ROUTES----------//
 
-// app.get('/', function(req,res){
-// 	res.render("home");
-// })
-
 app.get('/', function(req,res){
-
+	
 	var now = moment().format("HH:mm");
 	var day = moment().format("dddd");
 	res.render("home", {now: now, day: day, mapsjsapikey: mapsjsapikey});
@@ -70,7 +66,6 @@ app.post('/results', function(req,res){
 		}, function(err, response, body) {
 
 
-
 			var allresults = [];
 
 			if(err){
@@ -86,8 +81,6 @@ app.post('/results', function(req,res){
 					allresults.push(results[i]);
 				} 
 			} 
-
-
 
 			res.render("results", {allresults: allresults, mapsjsapikey: mapsjsapikey});
 			console.log('Allresults: '+allresults);
