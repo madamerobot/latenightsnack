@@ -37,7 +37,7 @@ const key = 'key='+process.env.googleapikey;
 //------ROUTES----------//
 
 app.get('/', function(req,res){
-
+	
 	var now = moment().format("HH:mm");
 	var day = moment().format("dddd");
 	res.render("home", {now: now, day: day, mapsjsapikey: mapsjsapikey});

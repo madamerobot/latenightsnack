@@ -2,6 +2,78 @@ doctype html
 html
 	head
 		title Late Night Snack
+		script(async='', defer='', src='https://maps.googleapis.com/maps/api/js?'+mapsjsapikey+'&libraries=places&callback=initMap')
+			script.
+				function initMap() {
+
+					//CREATING MAP
+					var centerlat = 52.370216;
+					var centerlng = 4.895168;				
+					var centerlocation = {lat: centerlat, lng: centerlng};
+
+					var map = new google.maps.Map(document.getElementById('map'), {
+					center: centerlocation,
+					zoom: 15
+					});
+
+					//CLEANING OUT RESULTS FORMAT TO BE USED FOR SETTING MARKERS & DETAIL REQUEST
+					function escapeHtml(text) {
+						return text
+						.replace(/&amp;/g, "&")
+						.replace(/&lt;/g, "<")
+						.replace(/&gt;/g, ">")
+						.replace(/&quot;/g, '"')
+						.replace(/&#039;/g, "'");
+						}
+
+					function replaceLinkQuotes(text) { //replaces <a href="bla"> to <a href='bla'>
+						return text
+							.replace(/<a href="/g, "<a href='")
+							.replace(/">/g, "'>");
+					}
+
+					var results = "#{JSON.stringify(allresults)}";
+					results = escapeHtml(results);
+					results = replaceLinkQuotes(results);
+					results = JSON.parse(results);
+					console.log('Results frontend: '+results);
+
+					//CREATING MARKERS
+					function createMarker () {
+						for (var i=0; i<results.length; i++){
+
+							var resultlat = results[i].geometry.location.lat;
+							var resultlng = results[i].geometry.location.lng;
+							var resultlocation = {lat: resultlat, lng: resultlng};
+
+							var marker = new google.maps.Marker({
+								map: map,
+								position: resultlocation
+							});
+						}
+					}
+					createMarker()
+				}
+					//- //CREATING INFO WINDOW & INITIALISING DETAIL SEARCH
+					//- var infowindow = new google.maps.InfoWindow();
+					//- var service = new google.maps.places.PlacesService(map);
+
+					//- service.getDetails({
+					//- 	placeId: 'ChIJN1t_tDeuEmsRUsoyG83frY4'
+					//- }, function(place, status) {
+					//- if (status === google.maps.places.PlacesServiceStatus.OK) {
+					//- 	var marker = new google.maps.Marker({
+					//- 		map: map,
+					//- 		position: place.geometry.location
+					//- 	});
+					//- 	google.maps.event.addListener(marker, 'click', function() {
+					//- 	infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +
+					//- 		'Place ID: ' + place.place_id + '<br>' +
+					//- 		place.formatted_address + '</div>');
+					//- 	infowindow.open(map, this);
+					//- 	});
+					//- }
+					//- });
 	body
 		h3 Find your Midnight Snack
 		br
@@ -13,157 +85,13 @@ html
 			width: 100% !important;
 			height: 100% !important;
 			}
+			html, body {
+			height: 100%;
+			margin: 0;
+			padding: 0;
+			}
 	body
 		.container
 		h1 Responsive Map
 		#map_container
 		#map
-		script.
-			function initMap() {
-
-				function escapeHtml(text) {
-				  return text
-					.replace(/&amp;/g, "&")
-					.replace(/&lt;/g, "<")
-					.replace(/&gt;/g, ">")
-					.replace(/&quot;/g, '"')
-					.replace(/&#039;/g, "'");
-				}
-
-				function replaceLinkQuotes(text) { //replaces <a href="bla"> to <a href='bla'>
-					return text
-						.replace(/<a href="/g, "<a href='")
-						.replace(/">/g, "'>");
-				}
-
-				var results = "#{JSON.stringify(allresults)}";
-				results = escapeHtml(results);
-				results = replaceLinkQuotes(results);
-				results = JSON.parse(results);
-
-				var centerlat = 52.370216;
-				var centerlng = 4.895168;				
-				var centerlocation = {lat: centerlat, lng: centerlng};
-
-				var map = new google.maps.Map(document.getElementById('map'), {
-						zoom: 15,
-						center: centerlocation,
-						styles:[
-						{elementType: 'geometry', stylers: [{color: '#242f3e'}]},
-						{elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
-						{elementType: 'labels.text.fill', stylers: [{color: '#746855'}]},
-						{
-						featureType: 'administrative.locality',
-						elementType: 'labels.text.fill',
-						stylers: [{color: '#d59563'}]
-						},
-						{
-						featureType: 'poi',
-						elementType: 'labels.text.fill',
-						stylers: [{color: '#d59563'}]
-						},
-						{
-						featureType: 'poi.park',
-						elementType: 'geometry',
-						stylers: [{color: '#263c3f'}]
-						},
-						{
-						featureType: 'poi.park',
-						elementType: 'labels.text.fill',
-						stylers: [{color: '#6b9a76'}]
-						},
-						{
-						featureType: 'road',
-						elementType: 'geometry',
-						stylers: [{color: '#38414e'}]
-						},
-						{
-						featureType: 'road',
-						elementType: 'geometry.stroke',
-						stylers: [{color: '#212a37'}]
-						},
-						{
-						featureType: 'road',
-						elementType: 'labels.text.fill',
-						stylers: [{color: '#9ca5b3'}]
-						},
-						{
-						featureType: 'road.highway',
-						elementType: 'geometry',
-						stylers: [{color: '#746855'}]
-						},
-						{
-						featureType: 'road.highway',
-						elementType: 'geometry.stroke',
-						stylers: [{color: '#1f2835'}]
-						},
-						{
-						featureType: 'road.highway',
-						elementType: 'labels.text.fill',
-						stylers: [{color: '#f3d19c'}]
-						},
-						{
-						featureType: 'transit',
-						elementType: 'geometry',
-						stylers: [{color: '#2f3948'}]
-						},
-						{
-						featureType: 'transit.station',
-						elementType: 'labels.text.fill',
-						stylers: [{color: '#d59563'}]
-						},
-						{
-						featureType: 'water',
-						elementType: 'geometry',
-						stylers: [{color: '#17263c'}]
-						},
-						{
-						featureType: 'water',
-						elementType: 'labels.text.fill',
-						stylers: [{color: '#515c6d'}]
-						},
-						{
-						featureType: 'water',
-						elementType: 'labels.text.stroke',
-						stylers: [{color: '#17263c'}]
-						}
-						]
-				});
-
-				function createMarker(){
-
-					for(var i=0; i<results.length; i++){
-
-						var resultlat = results[i].geometry.location.lat;
-						var resultlng = results[i].geometry.location.lng;
-						var resultlocation = {lat: resultlat, lng: resultlng};
-						var resultname = results[i].name;
-						var resultaddress = results[i].vicinity;
-						var resultrating = results[i].rating;
-						var resultplaceid = results[i].place_id;
-
-						//Setting a new marker
-						var marker = new google.maps.Marker({
-							position: resultlocation,
-							map: map,
-							name: resultname,
-							address: resultaddress,
-							rating: resultrating,
-							placeid: resultplaceid
-						});
-						//Creating info windows
-						var infowindow = new google.maps.InfoWindow();
-
-						marker.addListener('click', function() {
-
-							//- service = new google.maps.places.PlacesService(map);
-							//- service.getDetails(this.placeid, callback);
-
-							infowindow.setContent("<h1>"+this.placeid+"</h1>"+"<h2>"+this.address+"<br>"+"Rating: "+this.rating+"</h2>");
-							infowindow.open(map, this);
-						});
-					}
-				}
-				createMarker();
-			}
-		script(src='https://maps.googleapis.com/maps/api/js?'+mapsjsapikey+'&callback=initMap', async='', defer='')
