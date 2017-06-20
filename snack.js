@@ -37,7 +37,7 @@ const key = 'key='+process.env.googleapikey;
 //------ROUTES----------//
 
 app.get('/', function(req,res){
-	
+
 	var now = moment().format("HH:mm");
 	var day = moment().format("dddd");
 	res.render("home", {now: now, day: day, mapsjsapikey: mapsjsapikey});
@@ -49,7 +49,7 @@ app.post('/results', function(req,res){
 	const baseurl = 'https://maps.googleapis.com/maps/api/place/radarsearch/json?';
 	const location = 'location=52.370216,4.895168';
 	const radius = 'radius=5000';
-	const type = 'type=restaurant';
+	const type = 'type=food';
 	const opennow = 'open_now=true';
 
 	// const queryurl = `${baseurl}${location}&${radius}&${type}&${opennow}&${key}`;
