@@ -74,7 +74,7 @@ app.post('/results', function(req,res){
 				var results = responseparsed.results;
 
 				for (var i = 0; i < results.length; i++) {
-					console.log('Results: '+results[i].name);
+					console.log('Results Place Id: '+results[i].place_id);
 					console.log('Results length: '+results.length)
 					allresults.push(results[i]);
 				} 

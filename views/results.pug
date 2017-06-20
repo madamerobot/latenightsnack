@@ -140,6 +140,7 @@ html
 						var resultname = results[i].name;
 						var resultaddress = results[i].vicinity;
 						var resultrating = results[i].rating;
+						var resultplaceid = results[i].place_id;
 
 						//Setting a new marker
 						var marker = new google.maps.Marker({
@@ -147,13 +148,18 @@ html
 							map: map,
 							name: resultname,
 							address: resultaddress,
-							rating: resultrating
+							rating: resultrating,
+							placeid: resultplaceid
 						});
 						//Creating info windows
 						var infowindow = new google.maps.InfoWindow();
 
 						marker.addListener('click', function() {
-							infowindow.setContent("<h1>"+this.name+"</h1>"+"<h2>"+this.address+"<br>"+"Rating: "+this.rating+"</h2>");
+
+							//- service = new google.maps.places.PlacesService(map);
+							//- service.getDetails(this.placeid, callback);
+
+							infowindow.setContent("<h1>"+this.placeid+"</h1>"+"<h2>"+this.address+"<br>"+"Rating: "+this.rating+"</h2>");
 							infowindow.open(map, this);
 						});
 					}
