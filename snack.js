@@ -65,6 +65,7 @@ app.post('/results', function(req,res){
 		maxRedireccts: 10
 		}, function(err, response, body) {
 
+
 			var allresults = [];
 
 			if(err){
@@ -76,9 +77,11 @@ app.post('/results', function(req,res){
 				for (var i = 0; i < results.length; i++) {
 					console.log('Results Place Id: '+results[i].place_id);
 					console.log('Results length: '+results.length)
+
 					allresults.push(results[i]);
 				} 
 			} 
+
 			res.render("results", {allresults: allresults, mapsjsapikey: mapsjsapikey});
 			console.log('Allresults: '+allresults);
 		}
