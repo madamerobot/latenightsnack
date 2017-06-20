@@ -49,52 +49,50 @@ app.get('/', function(req,res){
 
 app.post('/results', function(req,res){
 
-	//GOOGLE REQUEST URL
-	//ALWAYS THE SAME
-	const baseURL = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?';
-	
-	//VARIABLES
+	//PARAMETERS FOR SEARCH QUERY FOR RESTAURANTS, OPEN NOW
+	const baseurl = 'https://maps.googleapis.com/maps/api/place/radarsearch/json?';
 	const location = 'location=52.370216,4.895168';
+	const radius = 'radius=5000';
 	const type = 'type=restaurant';
-	const rankby = 'rankby=distance';
-	const radius = 'radius=50000';
+	const opennow = 'open_now=true';
 
-	//REQUEST TO GOOGLE API
-	// const url = `${baseURL}${location}&${radius}&${type}&${key}`;
-	const url = `${baseURL}${location}&${rankby}&${type}&${key}`;
+	// const queryurl = `${baseurl}${location}&${radius}&${type}&${opennow}&${key}`;
+	const queryurl = `${baseurl}${location}&${radius}&${type}&${opennow}&${key}`;
+	console.log('Query URL: '+queryurl);
 
+	//SEARCH QUERY TO GOOGLE PLACES API, USING REQUEST MODULE
 	request({
-		uri: url,
+		uri: queryurl,
 		method: "GET",
 		timeout: 10000,
 		followRedirect: true,
 		maxRedireccts: 10
-	}, function(err, response, body) {
+		}, function(err, response, body) {
 
-		var allresults = [];
 
-		if(err){
-			console.log(err);
-		} else {
-			var responseparsed = JSON.parse(body);
-			var results = responseparsed.results;
 
-			for (var i = 0; i < results.length; i++) {
-				console.log('Results: '+results[i].name);
-				console.log('Results length: '+results.length)
+			var allresults = [];
 
-				var openinghours = results[i].opening_hours
-				if (openinghours !== undefined && openinghours.open_now === true){
-						console.log('Open now: '+openinghours.open_now);
-						allresults.push(results[i]);
-				} else {
-					console.log('Unfortunately no opening hours provided');
-				}
+			if(err){
+				console.log(err);
+			} else {
+				var responseparsed = JSON.parse(body);
+				var results = responseparsed.results;
+
+				for (var i = 0; i < results.length; i++) {
+					console.log('Results Place Id: '+results[i].place_id);
+					console.log('Results length: '+results.length)
+
+					allresults.push(results[i]);
+				} 
 			} 
-		} 
-		res.render("results", {allresults: allresults, mapsjsapikey: mapsjsapikey});
-		console.log('Allresults: '+allresults);
-	}); 
+
+
+
+			res.render("results", {allresults: allresults, mapsjsapikey: mapsjsapikey});
+			console.log('Allresults: '+allresults);
+		}
+	)
 });
 
 //------------DEFINING PORT 8080 FOR SERVER----------------------
