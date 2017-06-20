@@ -2,13 +2,30 @@ doctype html
 html
 	head
 		title Late Night Snack
-		script(async='', defer='', src='https://maps.googleapis.com/maps/api/js?'+mapsjsapikey+'&libraries=places&callback=initMap')
-			script.
+	body
+		style.
+			#map {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100% !important;
+			height: 100% !important;
+			}
+			html, body {
+			height: 100%;
+			margin: 0;
+			padding: 0;
+			}
+	body
+		.container
+		#map_container
+		#map
+		script.
 				function initMap() {
 
 					//CREATING MAP
 					var centerlat = 52.370216;
-					var centerlng = 4.895168;				
+					var centerlng = 4.895168;               
 					var centerlocation = {lat: centerlat, lng: centerlng};
 
 					var map = new google.maps.Map(document.getElementById('map'), {
@@ -45,53 +62,35 @@ html
 							var resultlat = results[i].geometry.location.lat;
 							var resultlng = results[i].geometry.location.lng;
 							var resultlocation = {lat: resultlat, lng: resultlng};
+							var resultid = results[i].place_id;
 
 							var marker = new google.maps.Marker({
 								map: map,
-								position: resultlocation
+								position: resultlocation,
+								id: resultid
 							});
+
+							//CREATING INFO WINDOW & INITIALISING DETAIL SEARCH
+							var infowindow = new google.maps.InfoWindow();
+							var service = new google.maps.places.PlacesService(map);
+
+							marker.addListener('click', function() {
+								console.log('CLICK! This is my Places_ID: '+this.id);
+								service.getDetails({
+								placeId: this.id
+								}, function (place, status){
+									
+									console.log('This is my place name: '+place.name);
+									
+										infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +
+										place.formatted_address + '</div>' + '<br>' + place.opening_hours.weekday_text)
+										
+								})
+							infowindow.open(map, this);
+							})
 						}
 					}
-					createMarker()
+					createMarker();
 				}
-					//- //CREATING INFO WINDOW & INITIALISING DETAIL SEARCH
-					//- var infowindow = new google.maps.InfoWindow();
-					//- var service = new google.maps.places.PlacesService(map);
 
-					//- service.getDetails({
-					//- 	placeId: 'ChIJN1t_tDeuEmsRUsoyG83frY4'
-					//- }, function(place, status) {
-					//- if (status === google.maps.places.PlacesServiceStatus.OK) {
-					//- 	var marker = new google.maps.Marker({
-					//- 		map: map,
-					//- 		position: place.geometry.location
-					//- 	});
-					//- 	google.maps.event.addListener(marker, 'click', function() {
-					//- 	infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +
-					//- 		'Place ID: ' + place.place_id + '<br>' +
-					//- 		place.formatted_address + '</div>');
-					//- 	infowindow.open(map, this);
-					//- 	});
-					//- }
-					//- });
-	body
-		h3 Find your Midnight Snack
-		br
-		style.
-			#map {
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: 100% !important;
-			height: 100% !important;
-			}
-			html, body {
-			height: 100%;
-			margin: 0;
-			padding: 0;
-			}
-	body
-		.container
-		h1 Responsive Map
-		#map_container
-		#map
+	script(async='', defer='', src='https://maps.googleapis.com/maps/api/js?'+mapsjsapikey+'&libraries=places&callback=initMap')
