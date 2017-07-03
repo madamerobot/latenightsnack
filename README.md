@@ -6,9 +6,9 @@
 
 <h1>Screenshots:</h1>
 
-![Landing Page](img/screenshots/latenightsnack_start?raw=true "Landing Page")
+![Landing Page](img/screenshots/latenightsnack_start.png?raw=true "Landing Page")
 
-![Results](img/screenshots/latenightsnack_map?raw=true "Gallery")
+![Results](img/screenshots/latenightsnack_map.png?raw=true "Gallery")
 
 <h1>Team:</h1>
 <p>Jolanda Keizer<br>
