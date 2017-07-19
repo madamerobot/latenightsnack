@@ -92,6 +92,6 @@ app.post('/results', function(req,res){
 });
 
 //------------DEFINING PORT 8080 FOR SERVER----------------------
-var server = app.listen(8080, () => {
+var server = app.listen(3000, () => {
 	console.log('Yo, this http://localhost:' + server.address().port);
 });
