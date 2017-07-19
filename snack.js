@@ -1,5 +1,8 @@
 //---------CONFIG AND LIBRARIES-----------------
 
+//Config including Google Maps API keys
+const config = require('./config');
+
 //Requiring express library
 const express = require('express');
 //Initialising express library
@@ -31,8 +34,8 @@ app.use(express.static('css'));
 app.use(express.static('img'));
 
 //----API KEYS----//
-const mapsjsapikey = 'key='+process.env.googlemapsjsapi;
-const key = 'key='+process.env.googleapikey;
+const mapsjsapikey = 'key='+config.config.googlemapsjsapi;
+const key = 'key='+config.config.googleapikey;
 
 //------ROUTES----------//
 
