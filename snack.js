@@ -29,6 +29,9 @@ var moment = require('moment');
 //Configuration moment
 var moment = require('moment');
 moment.locale('nl');
+moment.now = function () {
+    return +new Date();
+}
 
 //Setting PUG view engine
 app.set('views', './views');
