@@ -2,36 +2,46 @@ doctype html
 html
 	head
 		title Late Night Snack
-		link(rel='stylesheet', href='https://www.w3schools.com/w3css/4/w3.css')
-		link(rel='stylesheet', href='../../main.css', type='text/css')
-		link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', integrity='sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u', crossorigin='anonymous')
-		link(href='https://fonts.googleapis.com/css?family=Orbitron', rel='stylesheet')
-		link(href='https://fonts.googleapis.com/css?family=Oswald:700', rel='stylesheet')
+		link(rel='stylesheet', type='text/css', href='../../main.css')
+		link(href='https://fonts.googleapis.com/css?family=Bangers|Oswald', rel='stylesheet')
 	body
-	.w3-row
-	
-	.w3-col(style='width:30%')
-		p 
-	.w3-col.middle(style='width:40%')
-		img.img-responsive(src='/logo.png', alt='')
-		h3 LATE NIGHT 
-		
-		img.img-border(src='/border.png', alt='')
-		h4 SNACK
-		.time #{now}
-		
-
-
-		form(action='/results', method='POST')
-			.button
-				//- button.btn.btn-danger.btn-lg(type='submit') FIND FOOD
-				input(type='image', src='/button.png', alt='Submit Form', class="button")
-
-
-
-
-
-	.w3-col(style='width:30%')
-		p
-
-			//- span(style='color:#d02168') #{day} <br>
+		.container
+			.center
+				.latenight.logo LATE NIGHT
+				.burger.img-responsive
+					svg(xmlns='http://www.w3.org/2000/svg', xmlns:xlink='http://www.w3.org/1999/xlink', viewbox='0 0 98.28 80.18')
+						defs
+							style.
+								.cls-1{fill:none;}.cls-2{fill:#c9982b;}.cls-3{fill:#bf1939;}.cls-4{fill:#44721c;}.cls-5{fill:#70421c;}.cls-6{clip-path:url(#clip-path);}.cls-7{font-size:12px;font-family:Oswald;}
+							clippath#clip-path(transform='translate(-11.77 -3.88)')
+								rect.cls-1(width='128.14', height='37.28')
+						title Asset 7
+						g#Layer_2(data-name='Layer 2')
+							g#Layer_2-2(data-name='Layer 2')
+								rect.cls-2(x='7.42', y='42.71', width='83.87', height='37.47', rx='12', ry='12')
+								rect.cls-3(x='7.28', y='51.18', width='87', height='8', rx='4', ry='4')
+								path.cls-4(d='M66,37.62C59,32.2,50.82,45,42.93,42.79c-3.79-1-7-5.5-10.84-5-2.9.39-5.19,3.54-8,4.39-3.59,1.08-7.92-1.51-10.75,1.6-2.67,2.94-1.6,9.13,1.22,11.84s6.55,2.88,10,2.78,7.15-.3,10.22,1.86c2.08,1.46,3.83,4,6.16,4.42,4.2.8,7.37-5.39,11.56-6.28,5.84-1.25,11,8,16.7,6.14,3.45-1.14,6.14-6.19,9.64-5.32,2.67.66,4.34,4.63,7,5.22,3.17.7,5.75-3.57,8.92-4.26,4.9-1.07,10.62,6.24,14.17,1.67,2.33-3,.68-8.65-2.19-10.66s-6.32-1.59-9.58-1.51-6.88-.45-9-3.68c-1-1.57-1.61-3.62-2.74-5.08-4.49-5.8-13.77,1.55-17.75-4.87', transform='translate(-11.77 -3.88)')
+								rect.cls-5(x='5.87', y='31.84', width='88.53', height='13.98', rx='6.99', ry='6.99')
+								path.cls-5(d='M40.68,13.93a1.5,1.5,0,0,0,0-3,1.5,1.5,0,0,0,0,3Z', transform='translate(-11.77 -3.88)')
+								path.cls-5(d='M69.67,24.28a1.5,1.5,0,0,0,0-3,1.5,1.5,0,0,0,0,3Z', transform='translate(-11.77 -3.88)')
+								g.cls-6
+									ellipse.cls-2(cx='49.58', cy='31.06', rx='48.15', ry='31.06')
+								path.cls-5(d='M73.81,17a1.5,1.5,0,0,0,0-3,1.5,1.5,0,0,0,0,3Z', transform='translate(-11.77 -3.88)')
+								path.cls-5(d='M45.86,22.73a1.5,1.5,0,0,0,0-3,1.5,1.5,0,0,0,0,3Z', transform='translate(-11.77 -3.88)')
+								path.cls-5(d='M57.76,33.08a1.5,1.5,0,0,0,0-3,1.5,1.5,0,0,0,0,3Z', transform='translate(-11.77 -3.88)')
+								path.cls-5(d='M53.62,12.89a1.5,1.5,0,0,0,0-3,1.5,1.5,0,0,0,0,3Z', transform='translate(-11.77 -3.88)')
+								path.cls-5(d='M89.86,26.35a1.5,1.5,0,0,0,0-3,1.5,1.5,0,0,0,0,3Z', transform='translate(-11.77 -3.88)')
+								path.cls-5(d='M76.4,26.87a1.5,1.5,0,0,0,0-3,1.5,1.5,0,0,0,0,3Z', transform='translate(-11.77 -3.88)')
+								path.cls-5(d='M64,22.73a1.5,1.5,0,0,0,0-3,1.5,1.5,0,0,0,0,3Z', transform='translate(-11.77 -3.88)')
+								path.cls-5(d='M32.91,19.1a1.5,1.5,0,0,0,0-3,1.5,1.5,0,0,0,0,3Z', transform='translate(-11.77 -3.88)')
+								path.cls-5(d='M38.61,32.56a1.5,1.5,0,0,0,0-3,1.5,1.5,0,0,0,0,3Z', transform='translate(-11.77 -3.88)')
+								path.cls-5(d='M26.7,25.83a1.5,1.5,0,0,0,0-3,1.5,1.5,0,0,0,0,3Z', transform='translate(-11.77 -3.88)')
+								path.cls-5(d='M21,30.49a1.5,1.5,0,0,0,0-3,1.5,1.5,0,0,0,0,3Z', transform='translate(-11.77 -3.88)')
+								path.cls-5(d='M98.15,32a1.5,1.5,0,0,0,0-3,1.5,1.5,0,0,0,0,3Z', transform='translate(-11.77 -3.88)')
+								path.cls-5(d='M84.69,15a1.5,1.5,0,0,0,0-3,1.5,1.5,0,0,0,0,3Z', transform='translate(-11.77 -3.88)')
+								text.cls-7(transform='translate(35.28 73.52)') #{now}
+				// closing burger SVG
+				.snack.logo
+					| SNACK
+					form.button(action='/results', method='POST')
+						input(type='image', src='/button.svg', alt='Submit Form')
