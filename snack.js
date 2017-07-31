@@ -26,6 +26,10 @@ var request = require('request');
 //Requiring moment module
 var moment = require('moment');
 
+//Configuration moment
+var moment = require('moment');
+moment.locale('nl');
+
 //Setting PUG view engine
 app.set('views', './views');
 app.set('view engine', 'pug');
