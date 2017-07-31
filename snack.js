@@ -28,7 +28,7 @@ var moment = require('moment');
 
 //Configuration moment
 var moment = require('moment');
-moment.locale('nl');
+moment.locale('de');
 moment.now = function () {
     return +new Date();
 }
