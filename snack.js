@@ -47,11 +47,17 @@ const key = 'key='+config.config.googleapikey;
 //------ROUTES----------//
 
 app.get('/', function(req,res){
-	
-	var now = moment().format("HH:mm");
-	console.log('now: '+now);
-	var nlnow = now + 2;
-	console.log('nlnow: '+nlnow);
+
+	var currentTime = new Date(),
+      hours = currentTime.getHours(),
+      minutes = currentTime.getMinutes();
+
+	if (minutes < 10) {
+	 minutes = "0" + minutes;
+  	}
+
+	var now = hours + ":" + minutes
+
 	res.render("home", {now: now, mapsjsapikey: mapsjsapikey});
 })
 
