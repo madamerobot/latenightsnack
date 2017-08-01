@@ -49,8 +49,10 @@ const key = 'key='+config.config.googleapikey;
 app.get('/', function(req,res){
 	
 	var now = moment().format("HH:mm");
-	var day = moment().format("dddd");
-	res.render("home", {now: now, day: day, mapsjsapikey: mapsjsapikey});
+	console.log('now: '+now);
+	var nlnow = now + 2;
+	console.log('nlnow: '+nlnow);
+	res.render("home", {now: now, mapsjsapikey: mapsjsapikey});
 })
 
 app.post('/results', function(req,res){

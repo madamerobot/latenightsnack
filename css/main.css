@@ -11,7 +11,9 @@
 	}
 	.button {
 		width: 100% !important;
-		justify-content: center;
+		-webkit-box-pack: center;
+		    -ms-flex-pack: center;
+		        justify-content: center;
 	}
 }
 
@@ -31,17 +33,21 @@ html, body {
     padding: 0;
     margin: 0;
     display: -webkit-box;
-    display: -moz-box;
     display: -ms-flexbox;
-    display: -webkit-flex;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
 }
 
 .center {
 	width: 40%;
-	justify-content: center;
+	-webkit-box-pack: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
 	/*margin-top: 5%;*/
 	margin-top: auto;
 	margin-bottom: auto;
@@ -79,12 +85,14 @@ html, body {
 }
 
 .snack {
-	font-family: 'Oswald', sans-serif;
-	font-style: italic;
+	/*font-family: 'Oswald', sans-serif;*/
+	font-family: 'Bangers', cursive;
+/*	font-style: italic;*/
 	font-weight: 500;
 }
 
 .button {
+	padding-top: 10%;
 	font-family: Oswald;
 	text-align: center;
 }
