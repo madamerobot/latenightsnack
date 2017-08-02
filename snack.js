@@ -27,11 +27,11 @@ var request = require('request');
 var moment = require('moment');
 
 //Configuration moment
-var moment = require('moment');
-moment.locale('de');
-moment.now = function () {
-    return +new Date();
-}
+// var moment = require('moment');
+// moment.locale('de');
+// moment.now = function () {
+//     return +new Date();
+// }
 
 //Setting PUG view engine
 app.set('views', './views');
@@ -59,6 +59,7 @@ app.get('/', function(req,res){
 	var now = hours + ":" + minutes
 
 	res.render("home", {now: now, mapsjsapikey: mapsjsapikey});
+	console.log('Current Time: '+currentTime+' getHours: '+hours+' getMinutes: '+minutes);
 })
 
 app.post('/results', function(req,res){
