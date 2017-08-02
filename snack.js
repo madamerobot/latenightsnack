@@ -59,7 +59,7 @@ app.get('/', function(req,res){
 	var now = hours + ":" + minutes
 
 	res.render("home", {now: now, mapsjsapikey: mapsjsapikey});
-	console.log('Current Time: '+currentTime+' getHours: '+hours+' getMinutes: '+minutes);
+	alert('Current Time: '+currentTime+' getHours: '+hours+' getMinutes: '+minutes);
 })
 
 app.post('/results', function(req,res){
