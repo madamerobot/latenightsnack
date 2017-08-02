@@ -23,15 +23,12 @@ app.use(bodyParser.json())
 //Requiring 'request' module
 var request = require('request');
 
-//Requiring moment module
-var moment = require('moment');
-
-//Configuration moment
+// //Requiring moment module
 // var moment = require('moment');
-// moment.locale('de');
-// moment.now = function () {
-//     return +new Date();
-// }
+
+// //Configuration moment
+// var moment = require('moment-timezone');
+// moment().tz("Europe/Berlin").format();
 
 //Setting PUG view engine
 app.set('views', './views');
@@ -49,17 +46,16 @@ const key = 'key='+config.config.googleapikey;
 app.get('/', function(req,res){
 
 	var currentTime = new Date(),
-      hours = currentTime.getHours(),
-      minutes = currentTime.getMinutes();
+		hours = currentTime.getUTCHours(),
+		minutes = currentTime.getUTCMinutes();
 
 	if (minutes < 10) {
 	 minutes = "0" + minutes;
   	}
 
-	var now = hours + ":" + minutes
+  	var now = hours + ":" + minutes
 
 	res.render("home", {now: now, mapsjsapikey: mapsjsapikey});
-	alert('Current Time: '+currentTime+' getHours: '+hours+' getMinutes: '+minutes);
 })
 
 app.post('/results', function(req,res){
