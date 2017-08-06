@@ -1,20 +1,9 @@
-/*RESPONSIVE*/
+/*DEBUGGING*/
 
-@media (max-width: 768px) {
-	.center {
-		width: 80% !important;
-	}
-	.logo {
-		padding-left: none !important;
-		padding-right: none !important;
-		font-size: 10vw !important;
-	}
-	.button {
-		width: 100% !important;
-		-webkit-box-pack: center;
-		    -ms-flex-pack: center;
-		        justify-content: center;
-	}
+*{
+/*	border-style: solid;
+	border-color: red;
+	border-width: 1px;*/
 }
 
 /*LAYOUT*/
@@ -28,10 +17,12 @@ html, body {
     height: 100%;
 }
 
+/*FLEX CONTAINER FOR .CENTER*/
 .container {
 	height: 100%;
     padding: 0;
     margin: 0;
+
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -43,60 +34,65 @@ html, body {
             justify-content: center;
 }
 
+/*FLEX CONTAINER FOR .LOGO, .SVG, .BUTTON AND .DISCLAIMER*/
 .center {
-	width: 40%;
+	
 	-webkit-box-pack: center;
 	    -ms-flex-pack: center;
 	        justify-content: center;
-	/*margin-top: 5%;*/
-	margin-top: auto;
-	margin-bottom: auto;
-	margin-left: auto;
-	margin-right: auto;
+
+	flex-direction: row;
+
 	text-align: center;
 	background-color: #5E57EE;
 }
 
-.burger {
-	padding-top: 3%;
-	padding-bottom: 3%;
-	padding-left: 25%;
-	padding-right: 25%;
-	
-	min-width: 50%;
-	max-width: 100%;
-	height: auto;
-}
-
 .logo {
-	font-size: 5vw;
+	font-size: 10vh;
 	text-align: center;
 	color: white;
+	padding-bottom: 5%;
+}
 
-	padding-left: 20%;
-	padding-right: 20%;
+/*.button {
+	max-width: 200px;
+}*/
+
+svg {
+	max-height: 200px;
+	max-width: 200px;
+}
+
+.disclaimer {
+	font-family: Oswald;
 }
 
 /*STYLING*/
 
 .latenight {
 	font-family: 'Bangers', cursive;
-	margin-bottom: 2%;
 }
 
 .snack {
-	/*font-family: 'Oswald', sans-serif;*/
 	font-family: 'Bangers', cursive;
-/*	font-style: italic;*/
 	font-weight: 500;
 }
 
-.button {
-	padding-top: 10%;
-	font-family: Oswald;
-	text-align: center;
+form.button {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	padding-top: 5%;
 }
 
-.disclaimer {
-	font-family: Oswald;
+input {
+	max-width: 200px;
 }
+
+/*.button {
+	padding-top: 5%;
+	font-family: Oswald;
+	text-align: center;
+	min-width: 200px;
+}*/
+

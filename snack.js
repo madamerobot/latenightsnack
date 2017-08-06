@@ -69,7 +69,7 @@ app.post('/results', function(req,res){
 
 	// const queryurl = `${baseurl}${location}&${radius}&${type}&${opennow}&${key}`;
 	const queryurl = `${baseurl}${location}&${radius}&${type}&${opennow}&${key}`;
-	console.log('Query URL: '+queryurl);
+	// console.log('Query URL: '+queryurl);
 
 	//SEARCH QUERY TO GOOGLE PLACES API, USING REQUEST MODULE
 	request({
@@ -98,7 +98,7 @@ app.post('/results', function(req,res){
 			} 
 
 			res.render("results", {allresults: allresults, mapsjsapikey: mapsjsapikey});
-			console.log('Allresults: '+allresults);
+			// console.log('Allresults: '+allresults);
 		}
 	)
 });
